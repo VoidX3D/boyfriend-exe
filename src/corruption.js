@@ -12,7 +12,7 @@
   var $ = BEX.dom.$;
   var fx = BEX.dom.fx;
 
-  function corr() { return S.realIndex / 15; }
+  function corr() { return BEX.config.TOTAL ? S.realIndex / BEX.config.TOTAL : 0; }
 
   function corruptionTier() {
     var c = corr();
@@ -66,9 +66,10 @@
   function corruptProgress() {
     var p = $("#hudProg");
     if (!p) return;
-    var orig = Math.min(S.realIndex, 15) + " / 15";
-    var junk = ["ERROR", "Question " + (S.realIndex + 1) + " / 15",
-                "Question " + S.realIndex + " / 14", "█▓▒░ ??"];
+    var total = BEX.config.TOTAL;
+    var orig = Math.min(S.realIndex, total) + " / " + total;
+    var junk = ["ERROR", "Question " + (S.realIndex + 1) + " / " + total,
+                "Question " + S.realIndex + " / " + Math.max(1, total - 1), "█▓▒░ ??"];
     var j = junk[Math.floor(Math.random() * junk.length)];
     p.textContent = j;
     setTimeout(function () { p.textContent = orig; }, 600);

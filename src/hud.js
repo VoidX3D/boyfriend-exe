@@ -34,7 +34,7 @@
       '<div class="rage-bar"><div class="rage-fill" id="rageFill"></div></div></div>' +
       '<span class="hud-mood" id="hudMood">' + BEX.reactions.moodLabel() + '</span>' +
       '<div class="hud-block"><span class="hud-label">PROGRESS</span>' +
-      '<span class="hud-val" id="hudProg">0 / 15</span></div>' +
+      '<span class="hud-val" id="hudProg">0 / ' + BEX.config.TOTAL + '</span></div>' +
       '<button id="muteBtn" class="mute-btn" title="mute" aria-label="mute">' +
         BEX.svg.sound + '</button>';
     $("#muteBtn").addEventListener("click", function () {
@@ -53,7 +53,7 @@
     sc.textContent = S.score;
     st.textContent = S.currentStreak + "×";
     rg.textContent = rageState();
-    pr.textContent = Math.min(S.realIndex, 15) + " / 15";
+    pr.textContent = Math.min(S.realIndex, BEX.config.TOTAL) + " / " + BEX.config.TOTAL;
     if (fill) fill.style.width = Math.min(100, S.rage) + "%";
     if (mood) mood.textContent = BEX.reactions.moodLabel();
   }

@@ -15,9 +15,7 @@
     <!-- engine.js builds #hud / #stage / #fx here -->
   </main>
 
-  <!-- Load order matters: data -> core -> audio -> feature modules -> boot -->
-  <script src="data/questions.js"></script>
-  <script src="data/content.js"></script>
+  <!-- Load order matters: core -> feature modules -> async JSON data boot -->
   <script src="src/core.js"></script>
   <script src="src/audio.js"></script>
   <script src="src/reactions.js"></script>

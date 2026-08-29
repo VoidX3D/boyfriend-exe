@@ -67,7 +67,7 @@
     document.body.setAttribute("data-corruption", "boss");
     BEX.corruption.stopCorruptionLoop();
 
-    var total = 15;
+    var total = BEX.config.TOTAL;
     var accuracy = Math.round((S.correctAnswers / total) * 100);
     var maxRage = Math.min(100, S.rage);
     var rank = rankFor(accuracy);
@@ -90,7 +90,7 @@
       '  <h2 class="result-title"># BOYFRIEND KNOWLEDGE REPORT</h2>' +
       '  <div class="report">' +
       '    <p>Player: <b>' + BEX.util.escapeHtml(S.playerName) + '</b></p>' +
-      '    <p>Questions survived: <b>15</b></p>' +
+      '    <p>Questions survived: <b>' + total + '</b></p>' +
       '    <p>Correct: <b>' + S.correctAnswers + '</b></p>' +
       '    <p>Wrong: <b>' + S.wrongAnswers + '</b></p>' +
       '    <p>Accuracy: <b>' + accuracy + '%</b></p>' +
@@ -120,7 +120,7 @@
   }
 
   function boyfriendResponse() {
-    var total = 15;
+    var total = BEX.config.TOTAL;
     var accuracy = Math.round((S.correctAnswers / total) * 100);
     var tier = S.correctAnswers === total ? "perfect"
       : accuracy <= 40 ? "low" : accuracy <= 70 ? "medium" : "high";

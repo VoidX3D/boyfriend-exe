@@ -2,9 +2,9 @@
  *  BOYFRIEND.EXE  —  src/reactions.js
  * -----------------------------------------------------------------------------
  *  The reaction engine: turns a correct / wrong / phantom answer into a chain
- *  of full-screen "redirect" pages. Picks typed reactions from data/content.js.
+ *  of full-screen "redirect" pages. Picks typed reactions from data/content.json.
  *  Option-specific reactions (opt.reaction) override the random pool.
- *  NO EMOJIS — all copy lives in CONTENT.
+ *  NO EMOJIS — all copy lives in data/content.json.
  * ========================================================================== */
 (function (global) {
   "use strict";

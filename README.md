@@ -15,11 +15,20 @@ npm start        # alias for dev
 No bundler, no framework. Open `index.html` through the dev server (don't open
 the file directly — the service worker and module scripts need http://).
 
+## Edit the quiz content
+
+The app loads `data/questions.json` and `data/content.json` at runtime. To change
+questions, edit the JSON, keep exactly one `correct: true` option on each real
+question, and reload the dev server. No engine JavaScript changes are needed.
+The service worker cache version in `sw.js` must be bumped when changing the
+schema or adding files that need to work offline.
+
 ## What's inside
 
 - `index.html` — loads the data + engine modules in order.
-- `data/questions.js` — the 15 boyfriend questions, 3 phantom questions, 5 bonus.
-- `data/content.js` — all the unhinged copy (edit this for new material).
+- `data/questions.json` — the 15 questions, 3 phantom questions, and 5 bonus questions.
+- `data/content.json` — all reaction copy, plot twists, achievements, and finale text.
+- `old_questions/` — archived question/content sources from previous quiz versions.
 - `src/` — engine modules: core, audio, reactions, redirect, hud, corruption,
   chaos, flow, namegate, results, main.
 - `styles/` — `main.css` (UI) and `corruption.css` (glitch effects).

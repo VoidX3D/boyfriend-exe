@@ -250,7 +250,7 @@
     setStage(
       '<div class="screen question-screen phantom">' +
       '  <div class="q-meta"><span class="q-cat">' + p.category + '</span>' +
-      '    <span class="q-num">?? / 15</span>' +
+      '    <span class="q-num">?? / ' + BEX.config.TOTAL + '</span>' +
       '    <span class="q-timer" id="phantomTimer">30s</span></div>' +
       '  <h2 class="q-text glitch-text">' + p.question + '</h2>' +
       '  <div class="answers">' + opts + '</div>' +

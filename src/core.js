@@ -12,7 +12,7 @@
 
   /* ----------------------------- CONFIG --------------------------------- */
   BEX.config = {
-    TOTAL: 15,
+    TOTAL: 0,
     TWIST_AFTER: [5, 9, 12, 14]
   };
 
@@ -101,9 +101,11 @@
   BEX.state = freshState();
 
   /* ----------------------------- DATA REFS ------------------------------ */
-  BEX.content = global.CONTENT || {};
-  BEX.questions = global.QUESTIONS || [];
-  BEX.phantom = global.PHANTOM_QUESTIONS || [];
+  /* These containers are hydrated by main.js from data/*.json before boot. */
+  BEX.content = {};
+  BEX.questions = [];
+  BEX.phantom = [];
+  BEX.bonus = [];
 
   /* ----------------------------- SFX PROXY ------------------------------ */
   /* Audio instance is created in main.js (BEX.audio). These proxies are safe

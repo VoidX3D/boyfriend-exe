@@ -1,0 +1,317 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "phase": "cute",
+      "category": "MORNING MODE",
+      "question": "Your boyfriend wakes up with one unexpected free hour. What does he do first?",
+      "hint": "Free time is just an unannounced project deadline.",
+      "options": [
+        { "id": "a", "text": "Make breakfast and enjoy a peaceful morning", "correct": false, "reaction": { "title": "TOO PEACEFUL.", "body": "A lovely fantasy. He has already opened three tabs and started investigating something." } },
+        { "id": "b", "text": "Go back to sleep immediately", "correct": false, "reaction": { "title": "TEMPTING.", "body": "He considered it. Then an idea happened, which is worse." } },
+        { "id": "c", "text": "Check his messages and accidentally lose the hour", "correct": true, "feedback": "" },
+        { "id": "d", "text": "Organize the entire day with a color-coded plan", "correct": false, "reaction": { "title": "AMBITIOUS.", "body": "He may create the plan. Following it is an entirely separate feature." } }
+      ],
+      "correctFeedback": "Correct. The free hour has been successfully converted into screen time."
+    },
+    {
+      "id": 2,
+      "phase": "cute",
+      "category": "SNACK SCIENCE",
+      "question": "When your boyfriend says he is not hungry, what does he actually mean?",
+      "hint": "Watch what happens when somebody else opens a snack.",
+      "options": [
+        { "id": "a", "text": "He genuinely is not hungry", "correct": false, "reaction": { "title": "UNSUPPORTED CLAIM.", "body": "The evidence does not support this. The evidence is currently looking at your snack." } },
+        { "id": "b", "text": "He will be hungry in exactly five minutes", "correct": false, "reaction": { "title": "CLOSE.", "body": "Five minutes is optimistic. The snack detection system is faster than that." } },
+        { "id": "c", "text": "He wants food but does not want to choose the food", "correct": false, "reaction": { "title": "PLAUSIBLE.", "body": "A strong theory, but the real answer involves a mysteriously empty packet." } },
+        { "id": "d", "text": "He is not hungry until someone else has food", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "Correct. Hunger has been activated by the presence of another person’s snack."
+    },
+    {
+      "id": 3,
+      "phase": "cute",
+      "category": "TEXTING",
+      "question": "Your boyfriend reads a message and does not reply. What is most likely happening?",
+      "hint": "Silence does not mean nothing is happening.",
+      "options": [
+        { "id": "a", "text": "He forgot to reply", "correct": false, "reaction": { "title": "PARTLY TRUE.", "body": "He did not forget the message. He forgot the concept of replying." } },
+        { "id": "b", "text": "He is writing the perfect response in his head", "correct": true, "feedback": "" },
+        { "id": "c", "text": "He is upset", "correct": false, "reaction": { "title": "DRAMATIC.", "body": "Not upset. Just mentally composing a reply that will now never leave the draft dimension." } },
+        { "id": "d", "text": "His phone has entered a mysterious silent state", "correct": false, "reaction": { "title": "CONVENIENT.", "body": "The phone works. The notification was seen. The reply is trapped somewhere else." } }
+      ],
+      "correctFeedback": "Correct. The reply exists in his head and nowhere else."
+    },
+    {
+      "id": 4,
+      "phase": "okay",
+      "category": "ERRANDS",
+      "question": "Your boyfriend needs to buy one thing from the store. How does the trip end?",
+      "hint": "The shopping list is only a suggestion.",
+      "options": [
+        { "id": "a", "text": "He buys the one thing and comes straight home", "correct": false, "reaction": { "title": "FICTION.", "body": "A one-item trip is theoretically possible. It has never been observed here." } },
+        { "id": "b", "text": "He returns with the one thing and three unrelated items", "correct": true, "feedback": "" },
+        { "id": "c", "text": "He forgets the one thing but buys a drink", "correct": false, "reaction": { "title": "A CLASSIC.", "body": "This has happened. But today he has evolved into a more expensive version of the problem." } },
+        { "id": "d", "text": "He turns the errand into a full afternoon expedition", "correct": false, "reaction": { "title": "TOO MUCH.", "body": "That is the advanced form. This question is asking about the standard encounter." } }
+      ],
+      "correctFeedback": "Correct. The bonus items were not optional. They simply appeared."
+    },
+    {
+      "id": 5,
+      "phase": "okay",
+      "category": "DECISION TREE",
+      "question": "When your boyfriend asks what you want to do, what happens next?",
+      "hint": "He asked for an answer, not necessarily a decision.",
+      "options": [
+        { "id": "a", "text": "He picks one of your suggestions immediately", "correct": false, "reaction": { "title": "SUSPICIOUS.", "body": "A decision that fast would trigger a security alert." } },
+        { "id": "b", "text": "He says he is fine with anything, then rejects every option", "correct": true, "feedback": "" },
+        { "id": "c", "text": "He presents a carefully researched shortlist", "correct": false, "reaction": { "title": "LATER.", "body": "He may present a shortlist after the situation has become unnecessarily complicated." } },
+        { "id": "d", "text": "He says the choice is yours and disappears", "correct": false, "reaction": { "title": "RUDE.", "body": "He remains physically present. His decision-making has disappeared." } }
+      ],
+      "correctFeedback": "Correct. ‘Anything’ has been confirmed to mean ‘not those things’."
+    },
+    {
+      "id": 6,
+      "phase": "okay",
+      "category": "FIX-IT MODE",
+      "question": "A tiny household problem appears. What does your boyfriend do?",
+      "hint": "The original problem is rarely the final scope.",
+      "options": [
+        { "id": "a", "text": "Fix it quickly with the simplest possible solution", "correct": false, "reaction": { "title": "NOT HIS BRAND.", "body": "The simplest solution has been rejected for lacking lore." } },
+        { "id": "b", "text": "Ignore it until it becomes urgent", "correct": false, "reaction": { "title": "POSSIBLE, BUT NO.", "body": "He has noticed it. That means the situation is about to receive a system." } },
+        { "id": "c", "text": "Research the problem until he understands its entire history", "correct": false, "reaction": { "title": "WARM.", "body": "Research is merely phase one. You have not yet accounted for the prototype." } },
+        { "id": "d", "text": "Build a solution that is far more advanced than the problem", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "Correct. The tiny problem now has documentation, settings, and a roadmap."
+    },
+    {
+      "id": 7,
+      "phase": "wtf",
+      "category": "BROWSER TABS",
+      "question": "How many browser tabs does your boyfriend consider a normal number?",
+      "hint": "The answer is not a number most browsers can display comfortably.",
+      "options": [
+        { "id": "a", "text": "Three or four", "correct": false, "reaction": { "title": "ADORABLE.", "body": "That is a calm person’s browser. Your boyfriend’s browser has a weather system." } },
+        { "id": "b", "text": "Ten, but only when he is researching something", "correct": false, "reaction": { "title": "UNDERCOUNTED.", "body": "Ten tabs is the loading screen before the real browser appears." } },
+        { "id": "c", "text": "Enough tabs that the titles have become tiny symbols", "correct": true, "feedback": "" },
+        { "id": "d", "text": "One tab per finished task", "correct": false, "reaction": { "title": "THEORETICAL.", "body": "Finished tasks do not generate tabs. Unfinished ideas do." } }
+      ],
+      "correctFeedback": "Correct. The tabs are not open; they are a permanent habitat."
+    },
+    {
+      "id": 8,
+      "phase": "wtf",
+      "category": "LOST OBJECTS",
+      "question": "Your boyfriend cannot find something that is directly in front of him. What happens?",
+      "hint": "He will search everywhere except the obvious place.",
+      "options": [
+        { "id": "a", "text": "He checks the exact place where it should be", "correct": false, "reaction": { "title": "TOO LOGICAL.", "body": "That location is excluded because it is too obvious." } },
+        { "id": "b", "text": "He asks Anuradha to find it", "correct": false, "reaction": { "title": "A VALID SYSTEM.", "body": "This is a proven backup protocol, but not the first response." } },
+        { "id": "c", "text": "He declares the object missing and starts a wider investigation", "correct": false, "reaction": { "title": "PREMATURE ESCALATION.", "body": "The investigation begins after the room has been searched three times." } },
+        { "id": "d", "text": "He looks everywhere, then discovers it was in his hand", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "Correct. The object has been recovered from the hand that was searching for it."
+    },
+    {
+      "id": 9,
+      "phase": "wtf",
+      "category": "MOVIE NIGHT",
+      "question": "Your boyfriend says he will choose a movie quickly. What should you expect?",
+      "hint": "The selection process has multiple hidden stages.",
+      "options": [
+        { "id": "a", "text": "A movie starts within five minutes", "correct": false, "reaction": { "title": "BOLD PREDICTION.", "body": "The streaming service has not even been opened yet." } },
+        { "id": "b", "text": "He watches trailers for two hours and chooses nothing", "correct": true, "feedback": "" },
+        { "id": "c", "text": "He watches the same favorite movie again", "correct": false, "reaction": { "title": "THE SAFE ROUTE.", "body": "That is the emergency fallback after the two-hour selection ritual." } },
+        { "id": "d", "text": "He asks you to choose while continuing to browse", "correct": false, "reaction": { "title": "ALSO POSSIBLE.", "body": "But tonight he has unlocked the director’s commentary for every trailer." } }
+      ],
+      "correctFeedback": "Correct. The movie was never the goal. The browsing was the event."
+    },
+    {
+      "id": 10,
+      "phase": "glitch",
+      "category": "NEW TOY",
+      "question": "Your boyfriend buys a new gadget. What happens before he uses it?",
+      "hint": "The box is only the beginning of the ceremony.",
+      "options": [
+        { "id": "a", "text": "He reads the quick-start guide and begins", "correct": false, "reaction": { "title": "IMPOSSIBLE.", "body": "He has already found a 46-minute review video." } },
+        { "id": "b", "text": "He watches reviews, comparisons, and teardown videos", "correct": true, "feedback": "" },
+        { "id": "c", "text": "He returns it because the box looked suspicious", "correct": false, "reaction": { "title": "TOO SOON.", "body": "The box must first be investigated from several camera angles." } },
+        { "id": "d", "text": "He gives it to someone else to set up", "correct": false, "reaction": { "title": "OUT OF CHARACTER.", "body": "He would rather invent a setup process than outsource the experience." } }
+      ],
+      "correctFeedback": "Correct. The gadget has been reviewed before it has been switched on."
+    },
+    {
+      "id": 11,
+      "phase": "glitch",
+      "category": "BEDTIME",
+      "question": "At bedtime, your boyfriend suddenly remembers an idea. What happens?",
+      "hint": "Sleep is about to lose the negotiation.",
+      "options": [
+        { "id": "a", "text": "He writes one note and goes to sleep", "correct": false, "reaction": { "title": "NICE TRY.", "body": "The note has become a diagram, and the diagram has become a prototype." } },
+        { "id": "b", "text": "He forgets it by morning", "correct": false, "reaction": { "title": "NO.", "body": "He will remember the least useful detail at 3:17 AM." } },
+        { "id": "c", "text": "He spends twenty minutes thinking about it", "correct": false, "reaction": { "title": "UNDERSTATED.", "body": "Twenty minutes is the advertised duration. The actual duration is classified." } },
+        { "id": "d", "text": "He opens his phone and accidentally starts a midnight project", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "Correct. The bedtime idea has been promoted to an active midnight operation."
+    },
+    {
+      "id": 12,
+      "phase": "glitch",
+      "category": "GROUP CHAT",
+      "question": "Your boyfriend sees a complicated group-chat discussion. What does he do?",
+      "hint": "He is not going to leave the thread with unanswered questions.",
+      "options": [
+        { "id": "a", "text": "Mute it and move on", "correct": false, "reaction": { "title": "HE COULD.", "body": "But now he needs to know why everyone is wrong." } },
+        { "id": "b", "text": "Read only the last message", "correct": false, "reaction": { "title": "DANGEROUS.", "body": "Context has been requested. He is traveling backward through 187 messages." } },
+        { "id": "c", "text": "Ask what happened and wait for the summary", "correct": false, "reaction": { "title": "OUTSOURCED CONTEXT.", "body": "He does not trust a summary when primary sources are available." } },
+        { "id": "d", "text": "Read the entire thread and reconstruct the timeline", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "Correct. The group chat is now a historical document."
+    },
+    {
+      "id": 13,
+      "phase": "stop",
+      "category": "EXPLANATIONS",
+      "question": "When your boyfriend says ‘it is a long story,’ what does that usually mean?",
+      "hint": "You have time. The story has chapters.",
+      "options": [
+        { "id": "a", "text": "He will give the short version", "correct": false, "reaction": { "title": "A TRAGIC MISREAD.", "body": "There is no short version. There are only deleted subplots." } },
+        { "id": "b", "text": "He does not want to discuss it", "correct": false, "reaction": { "title": "WRONG.", "body": "He absolutely wants to discuss it. He has already opened the supporting evidence." } },
+        { "id": "c", "text": "He will explain the key events in about five minutes", "correct": false, "reaction": { "title": "ADORABLE.", "body": "Five minutes is how long it takes to introduce the characters." } },
+        { "id": "d", "text": "He is about to deliver a detailed documentary with side quests", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "Correct. The story has entered its extended edition."
+    },
+    {
+      "id": 14,
+      "phase": "stop",
+      "category": "OPTIMISM",
+      "question": "Your boyfriend says ‘this should be easy.’ What should Anuradha do?",
+      "hint": "Prepare emotionally and locate the charger.",
+      "options": [
+        { "id": "a", "text": "Trust him completely and make no backup plan", "correct": false, "reaction": { "title": "DANGEROUS.", "body": "His confidence is genuine. The scope of the task is not." } },
+        { "id": "b", "text": "Ask how many hours he has planned for it", "correct": false, "reaction": { "title": "A GOOD QUESTION.", "body": "Unfortunately, the answer will be ‘not many’ followed by a new complication." } },
+        { "id": "c", "text": "Quietly prepare snacks and accept the timeline", "correct": false, "reaction": { "title": "WISE.", "body": "Very wise. But the canon response requires a little more emergency readiness." } },
+        { "id": "d", "text": "Prepare for an all-night operation disguised as a quick task", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "Correct. ‘Easy’ has been logged as a high-risk forecast."
+    },
+    {
+      "id": 15,
+      "phase": "boss",
+      "category": "FINAL DIAGNOSIS",
+      "question": "After observing all of this, which description best fits your boyfriend?",
+      "hint": "The answer is affectionate, accurate, and slightly alarming.",
+      "points": 100,
+      "isFinal": true,
+      "options": [
+        { "id": "a", "text": "A normal man who occasionally overthinks things", "correct": false, "reaction": { "title": "DENIED.", "body": "The evidence has exceeded ‘occasionally’ by several thousand percent." } },
+        { "id": "b", "text": "A thoughtful nerd with too many hobbies", "correct": false, "reaction": { "title": "PARTIAL CREDIT.", "body": "Thoughtful and nerdy, yes. But the hobbies have become infrastructure." } },
+        { "id": "c", "text": "A curious problem-solver who cannot leave anything at version one", "correct": false, "reaction": { "title": "ACCURATE, BUT INCOMPLETE.", "body": "That is the polite summary. The system requires the full diagnosis." } },
+        { "id": "d", "text": "A lovable chaos engineer turning every tiny idea into a full-scale side quest", "correct": true, "feedback": "" }
+      ],
+      "correctFeedback": "CORRECT. Diagnosis complete: lovable chaos engineer."
+    }
+  ],
+  "phantomQuestions": [
+    {
+      "id": "P1",
+      "phase": "wtf",
+      "category": "UNAUTHORIZED BONUS",
+      "injectAfter": 7,
+      "question": "What is your boyfriend thinking right now?",
+      "options": [
+        { "id": "a", "text": "A brilliant new idea" },
+        { "id": "b", "text": "Food" },
+        { "id": "c", "text": "Nothing at all" },
+        { "id": "d", "text": "He refuses to disclose that information" }
+      ],
+      "reveal": "THIS QUESTION IS NOT ANSWERABLE. His thoughts are protected by boyfriend encryption. You still selected an option. Fascinating."
+    },
+    {
+      "id": "P2",
+      "phase": "glitch",
+      "category": "TRUST EXERCISE",
+      "injectAfter": 11,
+      "question": "Which project will your boyfriend definitely finish this week?",
+      "options": [
+        { "id": "a", "text": "The newest one" },
+        { "id": "b", "text": "The oldest one" },
+        { "id": "c", "text": "The most practical one" },
+        { "id": "d", "text": "The one he has not started yet" }
+      ],
+      "reveal": "NONE OF THESE ARE SAFE ANSWERS. He may finish one, begin three more, and rename the folder. The quiz declines responsibility."
+    },
+    {
+      "id": "P3",
+      "phase": "stop",
+      "category": "FINAL TRAP",
+      "injectAfter": 13,
+      "question": "How long will your boyfriend’s ‘quick explanation’ take?",
+      "options": [
+        { "id": "a", "text": "Two minutes" },
+        { "id": "b", "text": "Ten minutes" },
+        { "id": "c", "text": "Until the explanation is complete" },
+        { "id": "d", "text": "There is no measurable unit" }
+      ],
+      "reveal": "THE CORRECT ANSWER WAS TO PROTECT YOUR EVENING. There was no such option. The explanation has begun."
+    }
+  ],
+  "bonusQuestions": [
+    {
+      "id": 16,
+      "category": "PACKING",
+      "question": "When your boyfriend packs for one night away, what does he bring?",
+      "options": [
+        { "id": "a", "text": "Only the essentials", "correct": false },
+        { "id": "b", "text": "One backup outfit", "correct": false },
+        { "id": "c", "text": "A charger and several cables", "correct": false },
+        { "id": "d", "text": "A portable command center for every possible scenario", "correct": true }
+      ]
+    },
+    {
+      "id": 17,
+      "category": "RESEARCH",
+      "question": "When your boyfriend becomes curious about a topic, what happens?",
+      "options": [
+        { "id": "a", "text": "He looks it up once", "correct": false },
+        { "id": "b", "text": "He reads a short summary", "correct": false },
+        { "id": "c", "text": "He watches one video", "correct": false },
+        { "id": "d", "text": "He acquires enough knowledge to give an unsolicited lecture", "correct": true }
+      ]
+    },
+    {
+      "id": 18,
+      "category": "FILES",
+      "question": "How does your boyfriend name a folder for a new project?",
+      "options": [
+        { "id": "a", "text": "project", "correct": false },
+        { "id": "b", "text": "new project", "correct": false },
+        { "id": "c", "text": "final project", "correct": false },
+        { "id": "d", "text": "final-project-final-v2-actually-final", "correct": true }
+      ]
+    },
+    {
+      "id": 19,
+      "category": "SLEEP",
+      "question": "What does your boyfriend call a reasonable bedtime?",
+      "options": [
+        { "id": "a", "text": "Before midnight", "correct": false },
+        { "id": "b", "text": "Midnight exactly", "correct": false },
+        { "id": "c", "text": "Whenever the work is done", "correct": false },
+        { "id": "d", "text": "The moment after one last idea stops expanding", "correct": true }
+      ]
+    },
+    {
+      "id": 20,
+      "category": "PRESENTATIONS",
+      "question": "Someone asks your boyfriend what he has been working on. What happens?",
+      "options": [
+        { "id": "a", "text": "He says ‘nothing much’", "correct": false },
+        { "id": "b", "text": "He gives a quick answer", "correct": false },
+        { "id": "c", "text": "He explains the main idea", "correct": false },
+        { "id": "d", "text": "They receive a complete presentation with historical context", "correct": true }
+      ]
+    }
+  ]
+}
