@@ -22,7 +22,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q1 */
   {
     id: 1, phase: "cute", category: "IDENTITY 🐈",
-    question: "If you were a cat, what kind of cat would you actually be?",
+    question: "If your boyfriend were a cat, what kind of cat would he actually be?",
     hint: "Think about how he moves through the world. Or doesn't.",
     options: [
       { id: "a", text: "Orange cat running on one brain cell and pure confidence", correct: false,
@@ -39,7 +39,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q2 */
   {
     id: 2, phase: "cute", category: "ROMANCE ❤️",
-    question: "What would you genuinely prefer for a date?",
+    question: "What would your boyfriend genuinely prefer for a date?",
     hint: "Does he like 'plans' or does he like 'vibes'?",
     options: [
       { id: "a", text: "Fancy restaurant + romantic atmosphere", correct: false,
@@ -56,7 +56,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q3 */
   {
     id: 3, phase: "cute", category: "IDEAS 💀",
-    question: "You suddenly get an idea. What happens?",
+    question: "Your boyfriend suddenly gets an idea. What happens next?",
     hint: "Scale of 1 to 'we are now building something at 2am'.",
     options: [
       { id: "a", text: "I write it down and forget about it", correct: false,
@@ -73,7 +73,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q4 */
   {
     id: 4, phase: "okay", category: "SUPERPOWER 🦸",
-    question: "If you could have one completely useless superpower, which would you actually want?",
+    question: "If your boyfriend could have one completely useless superpower, which would he actually want?",
     hint: "What is his most boyfriend-shaped useless skill?",
     options: [
       { id: "a", text: "Always know where my phone is", correct: false,
@@ -90,7 +90,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q5 */
   {
     id: 5, phase: "okay", category: "ARGUMENT 😭",
-    question: "What are you actually like during an argument?",
+    question: "What is your boyfriend actually like during an argument?",
     hint: "Be honest. We both know the answer.",
     options: [
       { id: "a", text: "Calmly explain my side", correct: false,
@@ -107,7 +107,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q6 */
   {
     id: 6, phase: "okay", category: "CRISIS 🧟",
-    question: "The world ends tomorrow. What's your first move?",
+    question: "The world ends tomorrow. What's your boyfriend's first move?",
     hint: "Does he find you, or does he find a 'system'?",
     options: [
       { id: "a", text: "Find Anuradha", correct: false,
@@ -124,7 +124,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q7 */
   {
     id: 7, phase: "wtf", category: "HABITS 📱",
-    question: "Your phone says 1%. What do you do?",
+    question: "Your boyfriend's phone says 1%. What does he do?",
     hint: "Does 1% mean anything to him?",
     options: [
       { id: "a", text: "Immediately charge it", correct: false,
@@ -141,7 +141,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q8 */
   {
     id: 8, phase: "wtf", category: "ANIMAL 🦝",
-    question: "If you couldn't be human anymore, what animal would fit you best?",
+    question: "If your boyfriend couldn't be human anymore, what animal would fit him best?",
     hint: "Nocturnal? Hoards things? Lives behind a screen?",
     options: [
       { id: "a", text: "Cat", correct: false, reaction: { title: "WRONG.", body: "Too mainstream for him." } },
@@ -155,7 +155,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q9 */
   {
     id: 9, phase: "wtf", category: "NAVIGATION 🗺️",
-    question: "You and Anuradha are completely lost. What do you actually say?",
+    question: "You and Anuradha are completely lost. What does your boyfriend actually say?",
     hint: "Does 'I know where we are' ever end well?",
     options: [
       { id: "a", text: "Let's check the map.", correct: false, reaction: { title: "WRONG.", body: "He does not check the map." } },
@@ -170,7 +170,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q10 */
   {
     id: 10, phase: "glitch", category: "MONEY 💸",
-    question: "You suddenly receive $1,000. What is most likely to happen?",
+    question: "Your boyfriend suddenly receives $1,000. What is most likely to happen?",
     hint: "Money in, project out.",
     options: [
       { id: "a", text: "Save most/all of it", correct: false, reaction: { title: "WRONG.", body: "Responsible. Incorrect." } },
@@ -185,7 +185,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q11 */
   {
     id: 11, phase: "glitch", category: "TIME ⏰",
-    question: "You say: 'I'll be done in five minutes.' What does that ACTUALLY mean?",
+    question: "Your boyfriend says: 'I'll be done in five minutes.' What does that ACTUALLY mean?",
     hint: "Five minutes. Does it ever mean five minutes.",
     options: [
       { id: "a", text: "Five actual minutes", correct: false, reaction: { title: "ADORABLE.", body: "No." } },
@@ -199,7 +199,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q12 */
   {
     id: 12, phase: "glitch", category: "TECH 💻",
-    question: "If you were a computer, what would your biggest problem be?",
+    question: "If your boyfriend were a computer, what would his biggest problem be?",
     hint: "Too many tabs? Installs junk? Overheats from thinking?",
     options: [
       { id: "a", text: "Low storage", correct: false, reaction: { title: "WRONG.", body: "He'd just buy more." } },
@@ -213,7 +213,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q13 */
   {
     id: 13, phase: "stop", category: "CONFIDENCE 🚨",
-    question: "You say: 'Don't worry, I know what I'm doing.' What is usually happening?",
+    question: "Your boyfriend says: 'Don't worry, I know what I'm doing.' What is usually happening?",
     hint: "Back up the files. Always back up the files.",
     options: [
       { id: "a", text: "I genuinely know what I'm doing", correct: false, reaction: { title: "WRONG.", body: "Absolutely not." } },
@@ -227,7 +227,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q14 */
   {
     id: 14, phase: "stop", category: "PERSONA ☢️",
-    question: "Which version of you should society fear most?",
+    question: "Which version of your boyfriend should society fear most?",
     hint: "2am + a new idea = danger.",
     options: [
       { id: "a", text: "Hungry me", correct: false, reaction: { title: "WRONG.", body: "Manageable with snacks." } },
@@ -241,7 +241,7 @@ const QUESTIONS = [
   /* ----------------------------------------------------------------- Q15 — FINAL BOSS */
   {
     id: 15, phase: "boss", category: "TRUE SELF 💀",
-    question: "After everything you've learned, which description is actually you?",
+    question: "After everything you've learned, which description is actually your boyfriend?",
     hint: "Be honest. The quiz already knows.",
     points: 100, isFinal: true,
     options: [
@@ -306,35 +306,35 @@ const PHANTOM_QUESTIONS = [
  *  flow. Kept here so the boyfriend lore is complete. All canon answer = D.
  * ========================================================================== */
 const BONUS_QUESTIONS = [
-  { id: 16, category: "BORED 🥱", question: "When you're bored, what do you do?",
+  { id: 16, category: "BORED 🥱", question: "When your boyfriend is bored, what does he do?",
     options: [
       { id: "a", text: "Watch something", correct: false },
       { id: "b", text: "Scroll endlessly", correct: false },
       { id: "c", text: "Start a random project", correct: false },
       { id: "d", text: "Invent a completely unnecessary problem so I can solve it", correct: true }
     ] },
-  { id: 17, category: "CURIOSITY 🧠", question: "When you discover something interesting, what happens?",
+  { id: 17, category: "CURIOSITY 🧠", question: "When your boyfriend discovers something interesting, what happens?",
     options: [
       { id: "a", text: "Think 'that's cool'", correct: false },
       { id: "b", text: "Look it up", correct: false },
       { id: "c", text: "Research it for hours", correct: false },
       { id: "d", text: "Accidentally become an expert and start planning a project around it", correct: true }
     ] },
-  { id: 18, category: "PROJECTS 📂", question: "Your relationship with unfinished projects?",
+  { id: 18, category: "PROJECTS 📂", question: "What's your boyfriend's relationship with unfinished projects?",
     options: [
       { id: "a", text: "I finish everything", correct: false },
       { id: "b", text: "I have a few unfinished things", correct: false },
       { id: "c", text: "I have several unfinished things", correct: false },
       { id: "d", text: "My unfinished projects have formed their own civilization", correct: true }
     ] },
-  { id: 19, category: "SLEEP 😴", question: "Your natural sleep schedule?",
+  { id: 19, category: "SLEEP 😴", question: "What's your boyfriend's natural sleep schedule?",
     options: [
       { id: "a", text: "Responsible", correct: false },
       { id: "b", text: "Mostly responsible", correct: false },
       { id: "c", text: "Questionable", correct: false },
       { id: "d", text: "What is a sleep schedule?", correct: true }
     ] },
-  { id: 20, category: "TALKING 💻", question: "Someone asks what you're working on.",
+  { id: 20, category: "TALKING 💻", question: "Someone asks your boyfriend what he's working on.",
     options: [
       { id: "a", text: "Nothing much.", correct: false },
       { id: "b", text: "Explain the current project", correct: false },
