@@ -1,0 +1,76 @@
+/* =============================================================================
+ *  BOYFRIEND.EXE  —  styles/corruption.css
+ *  Glitch / distortion effects, scaled by body[data-corruption] tiers 1..5/boss.
+ *  These are cosmetic only; the actual answer never becomes unclickable.
+ * ========================================================================== */
+
+/* --- shake (data-tier >= 2) --- */
+body[data-corruption="2"] #app,
+body[data-corruption="3"] #app,
+body[data-corruption="4"] #app,
+body[data-corruption="5"] #app,
+body[data-corruption="boss"] #app { will-change: transform; }
+
+#app.shake { animation: shake .38s linear; }
+@keyframes shake {
+  0%,100% { transform: translate(0,0); }
+  20% { transform: translate(-6px, 3px) rotate(-.4deg); }
+  40% { transform: translate(5px, -4px) rotate(.4deg); }
+  60% { transform: translate(-4px, -2px); }
+  80% { transform: translate(4px, 3px); }
+}
+
+/* --- score flicker --- */
+.hud-val.flicker { animation: flick .26s steps(2) 2; color: var(--bad); }
+@keyframes flick { 0%,100% { opacity: 1; } 50% { opacity: .25; transform: skewX(-6deg); } }
+
+/* --- generic text glitch (used by phantom + boss) --- */
+.glitch-text { position: relative; }
+body[data-corruption="4"] .glitch-text,
+body[data-corruption="5"] .glitch-text,
+body[data-corruption="boss"] .glitch-text {
+  animation: textGlitch 2.4s infinite;
+}
+@keyframes textGlitch {
+  0%, 92%, 100% { text-shadow: none; transform: none; }
+  93% { text-shadow: 2px 0 #ff3860, -2px 0 #36d1ff; transform: translateX(2px); }
+  95% { text-shadow: -2px 0 #ff3860, 2px 0 #36d1ff; transform: translateX(-2px); }
+  97% { text-shadow: 1px 0 #ff3860; transform: translateX(1px); }
+}
+
+/* --- tier 3+: subtle chromatic aberration on the whole stage --- */
+body[data-corruption="3"] #stage { animation: aberr 5s infinite; }
+body[data-corruption="4"] #stage { animation: aberr 3.2s infinite; }
+@keyframes aberr {
+  0%, 88%, 100% { filter: none; }
+  90% { filter: hue-rotate(20deg) saturate(1.4); transform: translateX(1px); }
+  94% { filter: hue-rotate(-25deg); transform: translateX(-1px); }
+}
+
+/* --- tier 4+: scanline overlay --- */
+body[data-corruption="4"]::after,
+body[data-corruption="5"]::after,
+body[data-corruption="boss"]::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 55; opacity: .35;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.0) 0px, rgba(0,0,0,.0) 2px, rgba(0,0,0,.25) 3px, rgba(0,0,0,0) 4px);
+  mix-blend-mode: multiply;
+}
+
+/* --- tier 5 / boss: heavy distortion + occasional invert --- */
+body[data-corruption="5"] #stage,
+body[data-corruption="boss"] #stage { animation: aberr 2.4s infinite, wobble 6s infinite; }
+@keyframes wobble {
+  0%, 96%, 100% { transform: none; }
+  97% { transform: scale(1.015) rotate(.5deg); filter: invert(.08); }
+  99% { transform: scale(.99) rotate(-.5deg); }
+}
+body[data-corruption="boss"] { filter: contrast(1.1); }
+body[data-corruption="boss"] .q-text,
+body[data-corruption="boss"] .ans-text { letter-spacing: .5px; }
+
+/* --- reduced motion: kill the heavy stuff, keep it readable --- */
+@media (prefers-reduced-motion: reduce) {
+  #app.shake { animation: none; }
+  .glitch-text, #stage, body[data-corruption] #stage { animation: none !important; }
+  body[data-corruption]::after { display: none; }
+}

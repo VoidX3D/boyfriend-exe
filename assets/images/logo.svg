@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 130">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#ff4d8d"/>
+    </linearGradient>
+  </defs>
+  <text x="4" y="80" font-family="'Trebuchet MS', Verdana, sans-serif" font-size="62" font-weight="900" fill="url(#lg)" letter-spacing="1">BOYFRIEND<tspan fill="#ffffff">.EXE</tspan></text>
+  <rect x="4" y="96" width="540" height="7" rx="3.5" fill="url(#lg)" opacity="0.85"/>
+  <text x="4" y="120" font-family="monospace" font-size="14" fill="#b9b2d6">how well do you know your boyfriend?</text>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "name": "BOYFRIEND.EXE",
+  "short_name": "BF.EXE",
+  "description": "How well do you actually know your boyfriend?",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0b1a",
+  "theme_color": "#0b0b1a",
+  "icons": [
+    { "src": "assets/images/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
