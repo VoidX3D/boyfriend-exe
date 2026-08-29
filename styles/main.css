@@ -280,9 +280,11 @@ body {
 }
 
 html, body {
-  height: 100%;
+  min-height: 100%;
+  height: auto;
   overflow-x: hidden;
-  overscroll-behavior: none;
+  overflow-y: auto;
+  overscroll-behavior-y: auto;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -297,12 +299,11 @@ html, body {
 #app::-ms-content { scrollbar-width: none; }
 
 #app {
-  height: 100%;
+  min-height: 100vh;
   padding:
     calc(var(--safe-t) + 6px) calc(var(--safe-r) + 6px)
     calc(var(--safe-b) + 6px) calc(var(--safe-l) + 6px);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
 }
 
 /* Big tap targets; 16px inputs stop iOS zoom-on-focus */
@@ -322,8 +323,7 @@ html, body {
   padding:
     calc(var(--safe-t) + 12px) calc(var(--safe-r) + 12px)
     calc(var(--safe-b) + 12px) calc(var(--safe-l) + 12px);
-  align-items: safe center;
-  justify-items: center;
+  align-items: flex-start;
 }
 .redirect-window { max-height: calc(100vh - var(--safe-t) - var(--safe-b) - 24px); overflow: auto; }
 
