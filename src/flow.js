@@ -83,10 +83,15 @@
              '<span class="ans-key">' + ["A", "B", "C", "D"][i] + '</span>' +
              '<span class="ans-text">' + escapeHtml(texts[i]) + '</span></button>';
     }).join("");
+    var progress = Math.round((q.id / Q.length) * 100);
     setStage(
       '<div class="screen question-screen">' +
+      '  <div class="q-progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="1" aria-valuemax="' + Q.length + '" aria-valuenow="' + q.id + '">' +
+      '    <span class="q-progress-fill" style="width:' + progress + '%"></span>' +
+      '  </div>' +
       '  <div class="q-meta"><span class="q-cat">' + q.category + '</span>' +
-      '    <span class="q-num">Question ' + q.id + ' / 15</span></div>' +
+      '    <span class="q-num">Question ' + q.id + ' / ' + Q.length + '</span></div>' +
+      '  <p class="q-kicker">THE SYSTEM IS WATCHING. CHOOSE CAREFULLY.</p>' +
       '  <h2 class="q-text">' + q.question + '</h2>' +
       '  <div class="answers">' + opts + '</div>' +
       '  <div class="q-actions">' +

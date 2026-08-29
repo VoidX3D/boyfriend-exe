@@ -112,9 +112,12 @@ body {
 
 /* ----------------------------- QUESTION ----------------------------- */
 .question-screen { display: flex; flex-direction: column; justify-content: center; min-height: 0; gap: clamp(8px, 1.8vh, 18px); }
+.q-progress { width: 100%; height: 6px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+.q-progress-fill { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), #ff3860); box-shadow: 0 0 14px rgba(124,92,255,.7); transition: width .35s ease; }
 .q-meta { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 0; letter-spacing: 1px; }
 .q-cat { color: var(--accent); font-weight: 700; }
 .q-num { font-weight: 700; }
+.q-kicker { color: var(--muted); font-family: "Courier New", monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: .8; }
 .q-text { font-size: clamp(18px, 3.6vw, 30px); font-weight: 800; margin-bottom: 0; line-height: 1.18; }
 
 .answers { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: clamp(8px, 1.6vh, 14px); flex: 1 1 auto; min-height: 0; }
