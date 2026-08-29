@@ -281,11 +281,20 @@ body {
 
 html, body {
   height: 100%;
-  overflow-x: hidden;          /* vertical scroll allowed; no horizontal jank */
+  overflow-x: hidden;
   overscroll-behavior: none;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
+
+/* hide scrollbar but allow scrolling */
+#app {
+  /* width needed for Firefox scrollbar hiding */
+  --scrollbar-width: 12px;
+}
+#app::-webkit-scrollbar { display: none; }
+#app { -ms-overflow-style: none; scrollbar-width: none; }
+#app::-ms-content { scrollbar-width: none; }
 
 #app {
   height: 100%;
