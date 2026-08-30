@@ -11,7 +11,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const OUT = path.join(ROOT, "dist");
 
-const COPY = ["index.html", "manifest.webmanifest", "sw.js", "src", "data", "styles", "assets"];
+const COPY = ["index.html", "manifest.webmanifest", "sw.js", "src", "data", "styles", "assets", "music"];
 
 function rm(p) {
   if (!fs.existsSync(p)) return;

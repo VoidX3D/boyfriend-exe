@@ -1,0 +1,39 @@
+name: Update music playlist
+
+on:
+  push:
+    paths:
+      - "music/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-playlist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate playlist manifest
+        run: node scripts/generate-playlist.js
+
+      - name: Commit updated playlist
+        run: |
+          if git diff --quiet -- data/playlist.json; then
+            echo "Playlist is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/playlist.json
+          git commit -m "chore: update music playlist"
+          git push

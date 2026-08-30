@@ -35,7 +35,8 @@ The app has a deliberately small, explicit runtime architecture.
 | `src/namegate.js` and `src/results.js` | Handle the player gate, finale, score report, and ending. |
 | `styles/main.css` | Layout, typography, question cards, centered reaction windows, and responsive UI. |
 | `styles/corruption.css` | Glitch, shake, flicker, and terminal effects. |
-| `assets/` | Images, favicon, Chewy font, and Rahoot/Razzia audio files. |
+| `assets/` | Images, favicon, Chewy font, and sound effects. |
+| `music/` | Background music files; add MP3 or FLAC files here. |
 | `sw.js` | PWA installation and offline caching. |
 
 ## Editing questions and content
@@ -74,37 +75,28 @@ The app derives the progress total from `questions.length`, so adding or removin
 
 ## Adding music vibes
 
-Add background tracks through `data/playlist.json`; do not edit the audio engine for normal playlist changes. Each enabled item needs a unique `id`, a player-facing `title`, and a `file` path ending in `.mp3` or `.flac`. The file itself must be placed at that path inside the static project.
+Add background tracks by placing `.mp3` or `.flac` files directly in the dedicated `music/` folder. You do not need to edit JavaScript or manually maintain the playlist manifest.
 
-```json
-{
-  "defaultTrack": "late-night",
-  "tracks": [
-    {
-      "id": "late-night",
-      "title": "Late Night Debugging",
-      "artist": "Your Name",
-      "file": "assets/audio/late-night.flac",
-      "format": "flac",
-      "description": "A slower, moody track.",
-      "enabled": true
-    },
-    {
-      "id": "boss-mode",
-      "title": "Boss Mode",
-      "artist": "Your Name",
-      "file": "assets/audio/boss-mode.mp3",
-      "format": "mp3",
-      "description": "A more energetic track.",
-      "enabled": true
-    }
-  ]
-}
+```text
+music/
+├── answersMusic.mp3
+├── late-night-debugging.flac
+└── boss-mode.mp3
 ```
 
-The player shows a **VIBE** selector in the HUD with previous and next buttons. Tracks advance automatically when one ends, and the selected track is remembered in `localStorage` under `boyfriendExeTrack`. Set `"enabled": false` while a track is still being prepared. The loader ignores unsupported extensions, missing titles, and disabled entries; at least one enabled MP3 or FLAC track must remain available.
+The repository workflow automatically scans `music/` whenever a music file is pushed, regenerates `data/playlist.json`, and commits the updated manifest. The app then displays the new tracks in the VIBE selector after deployment. Filenames become player-facing titles automatically: `late-night-debugging.flac` becomes `Late Night Debugging`.
 
-FLAC playback depends on the browser’s native audio support, while MP3 has broader compatibility. Keep an MP3 fallback in the list if the audience may use older browsers or mobile WebViews.
+To regenerate locally, run:
+
+```bash
+npm run playlist
+```
+
+The generated manifest can still be reviewed at `data/playlist.json`. It contains a unique track ID, title, artist label, encoded file path, detected format, description, and enabled state for every supported file. The first filename alphabetically becomes the default track. Rename files if you want to control their order, or manually change `defaultTrack` after generation if you prefer a different starting vibe.
+
+The player shows a **VIBE** selector in the HUD with previous and next buttons. Tracks advance automatically when one ends, and the selected track is remembered in `localStorage` under `boyfriendExeTrack`. FLAC playback depends on the browser’s native audio support, while MP3 has broader compatibility; keeping at least one MP3 fallback is recommended for older browsers and mobile WebViews.
+
+The scanner ignores unsupported files such as WAV, AAC, and OGG. Keep sound effects in `assets/audio/`; only background music belongs in `music/`.
 
 ## Audio and mute behavior
 
@@ -114,7 +106,7 @@ Audio files are optional. If an asset cannot play, the engine falls back to shor
 
 ## Service-worker and cache behavior
 
-The service worker uses a versioned cache named in `sw.js`. The JSON question and content files use network-first loading so returning players receive updated copy when online, while the cached version remains available offline. If the data schema or shell files change, increment the `CACHE` value in `sw.js` and rebuild.
+The service worker uses a versioned cache named in `sw.js`. The JSON question, content, and playlist files use network-first loading so returning players receive updated copy when online, while the cached version remains available offline. The static build includes the entire `music/` folder. If the data schema or shell files change, increment the `CACHE` value in `sw.js` and rebuild.
 
 If a browser appears to show an older build, perform a normal reload first. For a stubborn local development cache, unregister the site’s service worker in browser developer tools and reload once.
 
@@ -123,6 +115,7 @@ If a browser appears to show an older build, perform a normal reload first. For 
 Run the following before publishing:
 
 ```bash
+npm run playlist
 npm run build
 for f in src/*.js scripts/*.js sw.js; do node --check "$f"; done
 git diff --check

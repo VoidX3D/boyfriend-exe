@@ -7,6 +7,7 @@
     "dev": "node scripts/dev.js",
     "start": "node scripts/dev.js",
     "build": "node scripts/build.js",
+    "playlist": "node scripts/generate-playlist.js",
     "preview": "node scripts/dev.js"
   },
   "keywords": ["quiz", "game", "vanilla-js"],
