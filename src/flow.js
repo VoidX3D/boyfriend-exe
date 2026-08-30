@@ -140,6 +140,7 @@
     applyStreakBonus();
     BEX.sfx("correct");
     BEX.hud.updateHud();
+    if (BEX.hud.showMascotSpeech) BEX.hud.showMascotSpeech("correct");
 
     var extra = "";
     if (q.id === 10 && S.distribution.d >= 3) extra = BEX.reactions.conspiracyD();
@@ -164,6 +165,7 @@
     if (S.rage >= 100) { BEX.reactions.unlock("rage_machine"); rageLimit(); }
     BEX.sfx("wrong");
     BEX.hud.updateHud();
+    if (BEX.hud.showMascotSpeech) BEX.hud.showMascotSpeech("wrong");
 
     if (btn) { btn.classList.add("wrong-pick"); btn.disabled = true; }
 
@@ -228,6 +230,7 @@
     btn.disabled = true;
     BEX.sfx("reveal");
     BEX.hud.updateHud();
+    if (BEX.hud.showMascotSpeech) BEX.hud.showMascotSpeech("hint");
     var fb = $("#feedback");
     var h = document.createElement("p");
     h.className = "hint-show";

@@ -81,20 +81,29 @@
         "s)</b></p>"
       : "";
 
-    if (S.correctAnswers === total && S.hintsUsed === 0) return secretEnding();
+    if (S.cheatUsed) {
+      var cheatHeads = ["# CERTIFIED FRAUD", "# BOYFRIEND IMPERSONATOR", "# ROMANCE SCAMMER", "# LORE CRIMINAL"];
+      rank = { head: BEX.util.pick(cheatHeads), body: "You actually tried to cheat on a boyfriend quiz. The mascot is filing a restraining order. Score negated." };
+      accuracy = 0;
+    }
+
+    if (!S.cheatUsed && S.correctAnswers === total && S.hintsUsed === 0) return secretEnding();
 
     saveBest();
+    var displayScore = S.cheatUsed ? (-Math.abs(S.score) - 500) : S.score;
+    var cheatBanner = S.cheatUsed ? '<div style="padding:12px 16px;margin-bottom:16px;background:rgba(255,56,96,.12);border:1px solid var(--bad);border-radius:12px;color:var(--bad);font-weight:700">⚠️ CHEAT MODE DETECTED — This result is void. The mascot is judging you.</div>' : "";
 
     setStage(
       '<div class="screen result-screen">' +
-      '  <h2 class="result-title"># BOYFRIEND KNOWLEDGE REPORT</h2>' +
+      cheatBanner +
+      '  <h2 class="result-title"># ' + (S.cheatUsed ? 'FRAUD REPORT' : 'BOYFRIEND KNOWLEDGE REPORT') + '</h2>' +
       '  <div class="report">' +
       '    <p>Player: <b>' + BEX.util.escapeHtml(S.playerName) + '</b></p>' +
       '    <p>Questions survived: <b>' + total + '</b></p>' +
       '    <p>Correct: <b>' + S.correctAnswers + '</b></p>' +
       '    <p>Wrong: <b>' + S.wrongAnswers + '</b></p>' +
       '    <p>Accuracy: <b>' + accuracy + '%</b></p>' +
-      '    <p>Lore XP: <b>' + S.score.toLocaleString() + '</b></p>' +
+      '    <p>Lore XP: <b>' + displayScore.toLocaleString() + (S.cheatUsed ? ' (NEGATED)' : '') + '</b></p>' +
       '    <p>Best streak: <b>' + S.bestStreak + '×</b></p>' +
       '    <p>Hints used: <b>' + S.hintsUsed + '</b></p>' +
       '    <p>Maximum rage: <b>' + maxRage + '%</b></p>' +

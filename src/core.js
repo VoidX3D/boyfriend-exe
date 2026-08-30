@@ -95,7 +95,8 @@
       qStart: 0,
       achievements: {},
       answersLog: [],
-      dCount: 0
+      dCount: 0,
+      cheatUsed: false
     };
   }
   BEX.state = freshState();

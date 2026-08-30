@@ -21,6 +21,68 @@
     return "RAGE LIMIT EXCEEDED";
   }
 
+  var mascotClickCount = 0;
+  var mascotClickTimer = null;
+  var mascotSpeechTimer = null;
+
+  function getMascotMessages() {
+    return (BEX.content && BEX.content.mascotMessages) || {
+      idle: ["hey... do you even know me?", "the boyfriend is watching"],
+      correct: ["see? i knew you could", "nice one!"],
+      wrong: ["ugh... not like this", "the boyfriend is disappointed"],
+      hint: ["i'll give you a little help", "think harder..."],
+      end: ["we did it...", "the boyfriend is in awe"]
+    };
+  }
+
+  function showMascotSpeech(category) {
+    var bubble = $("#mascotBubble");
+    if (!bubble) return;
+    if (category === "cheat") {
+      bubble.textContent = "You actually tried to cheat. I'm... impressed?";
+      bubble.classList.add("show");
+      if (mascotSpeechTimer) clearTimeout(mascotSpeechTimer);
+      mascotSpeechTimer = setTimeout(function () { bubble.classList.remove("show"); }, 5000);
+      return;
+    }
+    var messages = getMascotMessages();
+    var arr = messages[category] || messages.idle;
+    var msg = arr[Math.floor(Math.random() * arr.length)];
+    bubble.textContent = msg;
+    bubble.classList.add("show");
+    if (mascotSpeechTimer) clearTimeout(mascotSpeechTimer);
+    mascotSpeechTimer = setTimeout(function () {
+      bubble.classList.remove("show");
+    }, 4500);
+  }
+
+  function startMascotIdle() {
+    if (mascotSpeechTimer) clearTimeout(mascotSpeechTimer);
+    showMascotSpeech("idle");
+    mascotSpeechTimer = setTimeout(startMascotIdle, 12000);
+  }
+
+  function stopMascotIdle() {
+    if (mascotSpeechTimer) clearTimeout(mascotSpeechTimer);
+    var bubble = $("#mascotBubble");
+    if (bubble) bubble.classList.remove("show");
+  }
+
+  function handleMascotClick() {
+    mascotClickCount++;
+    if (mascotClickCount >= 5) {
+      mascotClickCount = 0;
+      if (mascotClickTimer) clearTimeout(mascotClickTimer);
+      if (BEX.state) BEX.state.cheatUsed = true;
+      BEX.sfx("glitch");
+      showMascotSpeech("cheat");
+      BEX.hud.toast("⚠️ CHEAT MODE: Score negated. The mascot is judging you.");
+      return;
+    }
+    if (mascotClickTimer) clearTimeout(mascotClickTimer);
+    mascotClickTimer = setTimeout(function () { mascotClickCount = 0; }, 1500);
+  }
+
   function renderHud() {
     var hud = $("#hud");
     hud.style.display = "flex";
@@ -45,7 +107,11 @@
       '  </div>' +
       '</div>' +
       '<button id="muteBtn" class="mute-btn" title="' + (muted ? "unmute" : "mute") + '" aria-label="' + (muted ? "Unmute all audio" : "Mute all audio") + '">' +
-        (muted ? BEX.svg.mute : BEX.svg.sound) + '</button>';
+        (muted ? BEX.svg.mute : BEX.svg.sound) + '</button>' +
+      '<div id="mascotFloat" class="mascot-float" title="Click me (5x for a surprise)">' +
+      '  <img src="assets/images/mascot.svg" alt="Boyfriend mascot" />' +
+      '  <div id="mascotBubble" class="mascot-bubble"></div>' +
+      '</div>';
     $("#muteBtn").addEventListener("click", function () {
       var m = BEX.audio ? BEX.audio.toggleMute() : true;
       this.innerHTML = m ? BEX.svg.mute : BEX.svg.sound;
@@ -54,8 +120,10 @@
       BEX.hud.toast(m ? "MUTED. All music and sound effects are off."
                      : "SOUND ON. Music and sound effects restored.");
     });
+    $("#mascotFloat").addEventListener("click", handleMascotClick);
     bindMusicControls();
     updateHud();
+    startMascotIdle();
   }
 
   function bindMusicControls() {
@@ -113,6 +181,6 @@
     }, 3200);
   }
 
-  BEX.hud = { renderHud: renderHud, updateHud: updateHud, toast: toast, rageState: rageState };
+  BEX.hud = { renderHud: renderHud, updateHud: updateHud, toast: toast, rageState: rageState, showMascotSpeech: showMascotSpeech, startMascotIdle: startMascotIdle, stopMascotIdle: stopMascotIdle };
   BEX.ui = { toast: toast };
 })(window);
