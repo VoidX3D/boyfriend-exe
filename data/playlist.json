@@ -1,0 +1,31 @@
+{
+  "defaultTrack": "default",
+  "tracks": [
+    {
+      "id": "default",
+      "title": "Default Vibe",
+      "artist": "BOYFRIEND.EXE",
+      "file": "assets/audio/answersMusic.mp3",
+      "format": "mp3",
+      "description": "The original quiz soundtrack."
+    },
+    {
+      "id": "replace-with-your-track",
+      "enabled": false,
+      "title": "Add Your Own MP3 Vibe",
+      "artist": "Your Name",
+      "file": "assets/audio/your-track.mp3",
+      "format": "mp3",
+      "description": "Replace this example with your own MP3 file."
+    },
+    {
+      "id": "replace-with-your-flac",
+      "enabled": false,
+      "title": "Add Your Own FLAC Vibe",
+      "artist": "Your Name",
+      "file": "assets/audio/your-track.flac",
+      "format": "flac",
+      "description": "Replace this example with your own FLAC file."
+    }
+  ]
+}
