@@ -600,6 +600,43 @@
     "boyfriend: \"who taught you about the 47 projects\"",
     "boyfriend: \"the cat agrees with me, by the way.\""
   ],
+  "mascotMessages": {
+    "idle": [
+      "hey... do you even know me?",
+      "i'm right here you know",
+      "...looking at you",
+      "you can do better than that",
+      "i believe in you (kind of)",
+      "stop staring at the screen",
+      "the boyfriend is watching",
+      "are you ready for this?",
+      "don't make me regret this"
+    ],
+    "correct": [
+      "see? i knew you could",
+      "you're getting better at this",
+      "the boyfriend is proud",
+      "nice one!",
+      "you're on fire"
+    ],
+    "wrong": [
+      "ugh... not like this",
+      "that hurt me",
+      "you really chose that?",
+      "the boyfriend is disappointed",
+      "nice try though"
+    ],
+    "hint": [
+      "i'll give you a little help",
+      "think harder...",
+      "here's a clue"
+    ],
+    "end": [
+      "we did it...",
+      "i knew you were the one",
+      "the boyfriend is in awe"
+    ]
+  },
   "achievements": [
     {
       "id": "cat_detective",

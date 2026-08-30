@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b1a" />
+  <title>BOYFRIEND.EXE — How Well Do You Know Your Boyfriend?</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/corruption.css" />
+</head>
+<body data-corruption="1">
+  <main id="app">
+    <!-- engine.js builds #hud / #stage / #fx here -->
+  </main>
+
+  <!-- Load order matters: core -> feature modules -> async JSON data boot -->
+  <script src="src/core.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/reactions.js"></script>
+  <script src="src/redirect.js"></script>
+  <script src="src/hud.js"></script>
+  <script src="src/corruption.js"></script>
+  <script src="src/chaos.js"></script>
+  <script src="src/flow.js"></script>
+  <script src="src/namegate.js"></script>
+  <script src="src/results.js"></script>
+  <script src="src/extra.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>
