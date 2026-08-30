@@ -1,9 +1,9 @@
 /* =============================================================================
  *  BOYFRIEND.EXE  —  src/audio.js
  * -----------------------------------------------------------------------------
- *  AudioEngine: plays the Rahoot/Razzia SFX (assets/audio/*.mp3) when present,
- *  and falls back to synthesized Web Audio tones if a file is missing or
- *  blocked. The mute preference is persisted and applies to every audio path.
+ *  AudioEngine: music playlist playback plus SFX. Playlist tracks are loaded
+ *  from data/playlist.json and may point to .mp3 or .flac files. The mute
+ *  preference applies to every HTMLAudioElement and synthesized Web Audio tone.
  * ========================================================================== */
 (function (global) {
   "use strict";
@@ -18,29 +18,35 @@
     glitch:  "assets/audio/snearRoll.mp3",
     tense:   "assets/audio/snearRoll.mp3",
     results: "assets/audio/results.mp3",
-    music:   "assets/audio/answersMusic.mp3",
     countdown: ["assets/audio/three.mp3", "assets/audio/second.mp3", "assets/audio/first.mp3"]
   };
   var MUTE_KEY = "boyfriendExeMuted";
+  var MUSIC_KEY = "boyfriendExeTrack";
 
-  function readMutePreference() {
-    try { return localStorage.getItem(MUTE_KEY) === "1"; }
-    catch (e) { return false; }
+  function readStorage(key) {
+    try { return localStorage.getItem(key); }
+    catch (e) { return null; }
+  }
+
+  function saveStorage(key, value) {
+    try { localStorage.setItem(key, value); }
+    catch (e) { /* ignore storage restrictions */ }
   }
 
   function AudioEngine() {
-    this.muted = readMutePreference();
+    this.muted = readStorage(MUTE_KEY) === "1";
     this.ctx = null;
     this.cache = {};
     this.failed = {};
     this.active = [];
     this.musicEl = null;
     this.musicWanted = false;
+    this.playlist = [];
+    this.currentTrackIndex = 0;
   }
 
   AudioEngine.prototype._saveMutePreference = function () {
-    try { localStorage.setItem(MUTE_KEY, this.muted ? "1" : "0"); }
-    catch (e) { /* ignore storage restrictions */ }
+    saveStorage(MUTE_KEY, this.muted ? "1" : "0");
   };
 
   AudioEngine.prototype._ensureCtx = function () {
@@ -84,6 +90,7 @@
     Object.keys(this.cache).forEach(function (key) {
       if (all.indexOf(this.cache[key]) === -1) all.push(this.cache[key]);
     }, this);
+    if (this.musicEl && all.indexOf(this.musicEl) === -1) all.push(this.musicEl);
     all.forEach(function (el) {
       try { el.pause(); el.currentTime = 0; } catch (e) { /* ignore */ }
     });
@@ -144,10 +151,10 @@
     function step() {
       if (self.muted) { if (done) done(); return; }
       if (i >= seq.length) { if (done) done(); return; }
+      var kind = i === 2 ? "correct" : "click";
       var a = self._track(new Audio(seq[i]));
       a.preload = "auto";
-      a.addEventListener("error", function () { if (!self.muted) self._synth(i === 2 ? "correct" : "click"); });
-      var kind = i === 2 ? "correct" : "click";
+      a.addEventListener("error", function () { if (!self.muted) self._synth(kind); });
       var pr = a.play();
       if (pr && pr.catch) pr.catch(function () { if (!self.muted) self._synth(kind); });
       i++;
@@ -156,19 +163,84 @@
     step();
   };
 
+  AudioEngine.prototype.setPlaylist = function (config) {
+    var tracks = config && Array.isArray(config.tracks) ? config.tracks : [];
+    this.playlist = tracks.filter(function (track) {
+      return track && track.id && track.title && typeof track.file === "string" &&
+        /\.(mp3|flac)$/i.test(track.file);
+    });
+    if (!this.playlist.length) return;
+
+    var saved = readStorage(MUSIC_KEY);
+    var savedIndex = this.playlist.findIndex(function (track) { return track.id === saved; });
+    var defaultIndex = this.playlist.findIndex(function (track) { return track.id === config.defaultTrack; });
+    this.currentTrackIndex = savedIndex !== -1 ? savedIndex : (defaultIndex !== -1 ? defaultIndex : 0);
+  };
+
+  AudioEngine.prototype.getPlaylist = function () {
+    return this.playlist.slice();
+  };
+
+  AudioEngine.prototype.getCurrentTrack = function () {
+    return this.playlist[this.currentTrackIndex] || null;
+  };
+
+  AudioEngine.prototype._playCurrentTrack = function () {
+    if (this.muted || !this.playlist.length) return;
+    var track = this.getCurrentTrack();
+    if (!track) return;
+    if (this.musicEl) {
+      try { this.musicEl.pause(); this.musicEl.currentTime = 0; } catch (e) {}
+    }
+
+    var el = new Audio(track.file);
+    el.preload = "auto";
+    el.loop = false;
+    el.volume = 0.35;
+    var self = this;
+    el.addEventListener("ended", function () {
+      if (!self.muted && self.musicWanted) self.nextTrack(true);
+    });
+    el.addEventListener("error", function () {
+      if (self.musicWanted && self.playlist.length > 1) self.nextTrack(true);
+    });
+    this.musicEl = this._track(el);
+    var pr = el.play();
+    if (pr && pr.catch) pr.catch(function () { /* browser autoplay policy */ });
+  };
+
+  AudioEngine.prototype.selectTrack = function (value) {
+    var index = typeof value === "number" ? value : this.playlist.findIndex(function (track) { return track.id === value; });
+    if (index < 0 || index >= this.playlist.length) return this.getCurrentTrack();
+    this.currentTrackIndex = index;
+    var track = this.getCurrentTrack();
+    saveStorage(MUSIC_KEY, track.id);
+    if (this.musicWanted && !this.muted) this._playCurrentTrack();
+    return track;
+  };
+
+  AudioEngine.prototype.nextTrack = function (auto) {
+    if (!this.playlist.length) return null;
+    this.currentTrackIndex = (this.currentTrackIndex + 1) % this.playlist.length;
+    var track = this.getCurrentTrack();
+    saveStorage(MUSIC_KEY, track.id);
+    if (this.musicWanted && !this.muted) this._playCurrentTrack();
+    return track;
+  };
+
+  AudioEngine.prototype.previousTrack = function () {
+    if (!this.playlist.length) return null;
+    this.currentTrackIndex = (this.currentTrackIndex - 1 + this.playlist.length) % this.playlist.length;
+    var track = this.getCurrentTrack();
+    saveStorage(MUSIC_KEY, track.id);
+    if (this.musicWanted && !this.muted) this._playCurrentTrack();
+    return track;
+  };
+
   AudioEngine.prototype.startMusic = function () {
     this.musicWanted = true;
-    if (this.muted) return;
-    var el = this.musicEl || this._load("music");
-    if (!el) return;
-    try {
-      el.loop = true;
-      el.volume = 0.35;
-      this.musicEl = el;
-      this._track(el);
-      var pr = el.play();
-      if (pr && pr.catch) pr.catch(function () {});
-    } catch (e) { /* ignore */ }
+    if (this.muted || !this.playlist.length) return;
+    this._playCurrentTrack();
   };
 
   AudioEngine.prototype.stopMusic = function () {
@@ -185,7 +257,7 @@
       this._stopAll();
     } else {
       if (this.ctx) { try { this.ctx.resume(); } catch (e) {} }
-      if (this.musicWanted) this.startMusic();
+      if (this.musicWanted) this._playCurrentTrack();
     }
     return this.muted;
   };

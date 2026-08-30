@@ -36,6 +36,14 @@
       '<span class="hud-mood" id="hudMood">' + BEX.reactions.moodLabel() + '</span>' +
       '<div class="hud-block"><span class="hud-label">PROGRESS</span>' +
       '<span class="hud-val" id="hudProg">0 / ' + BEX.config.TOTAL + '</span></div>' +
+      '<div class="music-control" id="musicControl">' +
+      '  <span class="hud-label">VIBE</span>' +
+      '  <div class="music-row">' +
+      '    <button id="musicPrevBtn" class="music-btn" type="button" aria-label="Previous music track">‹</button>' +
+      '    <select id="musicSelect" class="music-select" aria-label="Choose background music"></select>' +
+      '    <button id="musicNextBtn" class="music-btn" type="button" aria-label="Next music track">›</button>' +
+      '  </div>' +
+      '</div>' +
       '<button id="muteBtn" class="mute-btn" title="' + (muted ? "unmute" : "mute") + '" aria-label="' + (muted ? "Unmute all audio" : "Mute all audio") + '">' +
         (muted ? BEX.svg.mute : BEX.svg.sound) + '</button>';
     $("#muteBtn").addEventListener("click", function () {
@@ -46,7 +54,39 @@
       BEX.hud.toast(m ? "MUTED. All music and sound effects are off."
                      : "SOUND ON. Music and sound effects restored.");
     });
+    bindMusicControls();
     updateHud();
+  }
+
+  function bindMusicControls() {
+    var select = $("#musicSelect");
+    var previous = $("#musicPrevBtn");
+    var next = $("#musicNextBtn");
+    var tracks = BEX.audio ? BEX.audio.getPlaylist() : [];
+    if (!select || !tracks.length) {
+      var control = $("#musicControl");
+      if (control) control.style.display = "none";
+      return;
+    }
+
+    select.innerHTML = tracks.map(function (track) {
+      var label = track.artist ? track.title + " — " + track.artist : track.title;
+      return '<option value="' + BEX.util.escapeHtml(track.id) + '">' + BEX.util.escapeHtml(label) + '</option>';
+    }).join("");
+    var current = BEX.audio.getCurrentTrack();
+    if (current) select.value = current.id;
+    select.addEventListener("change", function () {
+      var track = BEX.audio.selectTrack(this.value);
+      if (track) BEX.hud.toast("VIBE: " + BEX.util.escapeHtml(track.title));
+    });
+    previous.addEventListener("click", function () {
+      var track = BEX.audio.previousTrack();
+      if (track) { select.value = track.id; BEX.hud.toast("VIBE: " + BEX.util.escapeHtml(track.title)); }
+    });
+    next.addEventListener("click", function () {
+      var track = BEX.audio.nextTrack();
+      if (track) { select.value = track.id; BEX.hud.toast("VIBE: " + BEX.util.escapeHtml(track.title)); }
+    });
   }
 
   function updateHud() {

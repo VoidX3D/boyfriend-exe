@@ -70,7 +70,14 @@ body {
 .hud-val { font-size: 20px; font-weight: 800; }
 .rage-bar { width: 110px; height: 8px; background: rgba(255,255,255,.12); border-radius: 99px; margin-top: 4px; overflow: hidden; }
 .rage-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ffd166, #ff3860); transition: width .3s; }
-.mute-btn { margin-left: auto; background: none; border: 1px solid var(--card-brd); color: var(--ink); border-radius: 10px; padding: 6px 10px; cursor: pointer; font-size: 16px; }
+.music-control { display: flex; flex-direction: column; gap: 4px; min-width: min(260px, 42vw); }
+.music-row { display: flex; align-items: center; gap: 4px; }
+.music-select { min-width: 150px; max-width: 230px; border: 1px solid var(--card-brd); border-radius: 9px; padding: 7px 9px; background: rgba(0,0,0,.3); color: var(--ink); font: 600 13px var(--font); }
+.music-select:focus, .music-btn:focus-visible, .mute-btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.music-btn, .mute-btn { display: inline-grid; place-items: center; background: rgba(255,255,255,.06); border: 1px solid var(--card-brd); color: var(--ink); border-radius: 10px; cursor: pointer; transition: background .2s, transform .12s; }
+.music-btn { width: 30px; height: 30px; padding: 0; font-size: 22px; line-height: 1; }
+.music-btn:hover, .mute-btn:hover { background: rgba(124,92,255,.25); transform: translateY(-1px); }
+.mute-btn { margin-left: auto; min-width: 44px; min-height: 40px; padding: 6px 10px; font-size: 16px; }
 
 /* ----------------------------- STAGE -------------------------------- */
 #stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: calc(var(--safe-t) + 8px) 14px calc(var(--safe-b) + 10px); }
@@ -206,6 +213,8 @@ body {
   #hud { gap: 10px 14px; font-size: 13px; }
   .hud-val { font-size: 16px; }
   .rage-bar { width: 80px; }
+  .music-control { flex: 1 1 100%; min-width: 0; order: 5; }
+  .music-select { flex: 1; max-width: none; min-width: 0; }
   .btn { padding: 12px 20px; font-size: 16px; }
 }
 
@@ -357,6 +366,8 @@ html, body {
   .q-actions { flex-direction: column; align-items: stretch; }
   .q-actions .btn { width: 100%; }
   .hud-label { font-size: 10px; letter-spacing: 1px; }
+  .music-row { width: 100%; }
+  .music-select { font-size: 12px; }
   .report p, .rank-body, .rank-head { font-size: 14px; }
   .result-actions { flex-direction: column; }
   .result-actions .btn { width: 100%; }

@@ -29,7 +29,7 @@ The app has a deliberately small, explicit runtime architecture.
 | `src/flow.js` | Runs question display, answer selection, retries, hints, and progression. |
 | `src/reactions.js` | Builds correct, wrong, phantom, streak, and answer-reveal reactions. |
 | `src/redirect.js` | Renders the fake-browser reaction windows. |
-| `src/audio.js` | Plays music and effects, falls back to Web Audio tones, and owns mute state. |
+| `src/audio.js` | Plays the configurable MP3/FLAC playlist and effects, falls back to Web Audio tones, and owns mute state. |
 | `src/hud.js` | Renders score, streak, rage, progress, and the global mute control. |
 | `src/corruption.js` and `src/chaos.js` | Add escalating visual and ambient chaos. |
 | `src/namegate.js` and `src/results.js` | Handle the player gate, finale, score report, and ending. |
@@ -46,6 +46,7 @@ All editable quiz data is in JSON. The engine reads these files at startup, so c
 |---|---|
 | `data/questions.json` | Main questions, phantom questions, and bonus questions. |
 | `data/content.json` | Shared reaction pools, plot twists, achievements, messages, and ending copy. |
+| `data/playlist.json` | Editable background-music track list and default track selection. |
 | `old_questions/` | Archived question and content sources from earlier versions. |
 
 A real question must have exactly one option with `"correct": true`. Each option may also include a `reaction` object for a custom wrong-answer response. A typical real question looks like this:
@@ -71,9 +72,43 @@ Keep `id` values unique. The main question bank should retain four options becau
 
 The app derives the progress total from `questions.length`, so adding or removing main questions does not require updating HUD or results code. After editing JSON, run the build and reload the page.
 
+## Adding music vibes
+
+Add background tracks through `data/playlist.json`; do not edit the audio engine for normal playlist changes. Each enabled item needs a unique `id`, a player-facing `title`, and a `file` path ending in `.mp3` or `.flac`. The file itself must be placed at that path inside the static project.
+
+```json
+{
+  "defaultTrack": "late-night",
+  "tracks": [
+    {
+      "id": "late-night",
+      "title": "Late Night Debugging",
+      "artist": "Your Name",
+      "file": "assets/audio/late-night.flac",
+      "format": "flac",
+      "description": "A slower, moody track.",
+      "enabled": true
+    },
+    {
+      "id": "boss-mode",
+      "title": "Boss Mode",
+      "artist": "Your Name",
+      "file": "assets/audio/boss-mode.mp3",
+      "format": "mp3",
+      "description": "A more energetic track.",
+      "enabled": true
+    }
+  ]
+}
+```
+
+The player shows a **VIBE** selector in the HUD with previous and next buttons. Tracks advance automatically when one ends, and the selected track is remembered in `localStorage` under `boyfriendExeTrack`. Set `"enabled": false` while a track is still being prepared. The loader ignores unsupported extensions, missing titles, and disabled entries; at least one enabled MP3 or FLAC track must remain available.
+
+FLAC playback depends on the browser’s native audio support, while MP3 has broader compatibility. Keep an MP3 fallback in the list if the audience may use older browsers or mobile WebViews.
+
 ## Audio and mute behavior
 
-The HUD mute button is a **global audio control**. When muted, it stops currently playing music, stops cached and active HTML audio effects, prevents countdown sounds, and disables synthesized Web Audio fallback tones. The choice is saved in `localStorage` under `boyfriendExeMuted`, so a reload keeps the player’s preference. Selecting the button again restores audio and resumes music when the game still wants music playing.
+The HUD mute button is a **global audio control**. When muted, it stops the selected playlist track, stops cached and active HTML audio effects, prevents countdown sounds, and disables synthesized Web Audio fallback tones. The choice is saved in `localStorage` under `boyfriendExeMuted`, so a reload keeps the player’s preference. Selecting the button again restores audio and resumes the selected vibe when the game still wants music playing.
 
 Audio files are optional. If an asset cannot play, the engine falls back to short synthesized tones when audio is enabled. Browsers may require the first sound to follow a user gesture; this is normal autoplay protection.
 
@@ -93,7 +128,7 @@ for f in src/*.js scripts/*.js sw.js; do node --check "$f"; done
 git diff --check
 ```
 
-Then verify that the following work in a browser: the page scrolls on small screens, the correct and wrong reaction windows are centered, question progress updates, the mute control changes its label and icon, music and effects stop when muted, and a reload preserves the mute preference.
+Then verify that the following work in a browser: the page scrolls on small screens, the correct and wrong reaction windows are centered, question progress updates, the VIBE selector changes tracks, a track advances when it ends, MP3 and FLAC paths load where supported, the mute control changes its label and icon, music and effects stop when muted, and a reload preserves both mute and selected-track preferences.
 
 ## Deployment
 

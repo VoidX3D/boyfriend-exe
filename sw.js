@@ -5,7 +5,7 @@
  *  quiz loads instantly and works offline on mobile. Bumps CACHE on each
  *  deploy (change the version string to invalidate).
  * ========================================================================== */
-var CACHE = "boyfriend-exe-v2-json";
+var CACHE = "boyfriend-exe-v3-playlist";
 var SHELL = [
   "./",
   "index.html",
@@ -26,6 +26,7 @@ var SHELL = [
   "src/main.js",
   "data/questions.json",
   "data/content.json",
+  "data/playlist.json",
   "assets/fonts/Chewy.woff2"
 ];
 

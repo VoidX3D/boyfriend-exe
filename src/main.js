@@ -7,7 +7,7 @@
 (function (global) {
   "use strict";
   var BEX = global.BEX;
-  var DATA_VERSION = "2026-08-29-json-v1";
+  var DATA_VERSION = "2026-08-30-playlist-v1";
   var booted = false;
 
   function readJson(url) {
@@ -28,6 +28,9 @@
     if (!data.content || typeof data.content !== "object") {
       throw new Error("content.json has an invalid structure");
     }
+    if (!data.playlist || !Array.isArray(data.playlist.tracks)) {
+      throw new Error("playlist.json has an invalid structure");
+    }
 
     BEX.questions.splice.apply(BEX.questions, [0, BEX.questions.length].concat(data.questions));
     BEX.phantom.splice.apply(BEX.phantom, [0, BEX.phantom.length].concat(data.phantomQuestions));
@@ -35,6 +38,13 @@
     Object.keys(data.content).forEach(function (key) {
       BEX.content[key] = data.content[key];
     });
+
+    var tracks = data.playlist.tracks.filter(function (track) {
+      return track && track.enabled !== false && track.id && track.title &&
+        typeof track.file === "string" && /\.(mp3|flac)$/i.test(track.file);
+    });
+    if (!tracks.length) throw new Error("playlist.json has no enabled MP3 or FLAC tracks");
+    BEX.playlist = { defaultTrack: data.playlist.defaultTrack, tracks: tracks };
     BEX.config.TOTAL = BEX.questions.length;
   }
 
@@ -60,18 +70,25 @@
       app.innerHTML = '<div id="hud" style="display:none"></div>' +
                       '<div id="stage"></div><div id="fx"></div>';
     }
-    if (BEX.AudioEngine) BEX.audio = new BEX.AudioEngine();
+    if (BEX.AudioEngine) {
+      BEX.audio = new BEX.AudioEngine();
+      if (BEX.playlist) BEX.audio.setPlaylist(BEX.playlist);
+    }
     BEX.namegate.renderNameScreen();
   }
 
   function loadAndBoot() {
-    return Promise.all([readJson("data/questions.json"), readJson("data/content.json")])
-      .then(function (files) {
+    return Promise.all([
+      readJson("data/questions.json"),
+      readJson("data/content.json"),
+      readJson("data/playlist.json")
+    ]).then(function (files) {
         hydrateData({
           questions: files[0].questions,
           phantomQuestions: files[0].phantomQuestions,
           bonusQuestions: files[0].bonusQuestions,
-          content: files[1]
+          content: files[1],
+          playlist: files[2]
         });
         boot();
       })
