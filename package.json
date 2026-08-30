@@ -1,15 +1,29 @@
 {
   "name": "boyfriend-exe",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "BOYFRIEND.EXE — a cute-then-unhinged boyfriend-knowledge quiz. Vanilla JS engine, no build step.",
+  "type": "module",
+  "description": "BOYFRIEND.EXE — React + Vite + TS, exact Rahoot player UI.",
   "scripts": {
-    "dev": "node scripts/dev.js",
-    "start": "node scripts/dev.js",
-    "build": "node scripts/build.js",
-    "playlist": "node scripts/generate-playlist.js",
-    "preview": "node scripts/dev.js"
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "dev:legacy": "node scripts/dev.js",
+    "build:legacy": "node scripts/build.js",
+    "playlist": "node scripts/generate-playlist.js"
   },
-  "keywords": ["quiz", "game", "vanilla-js"],
-  "license": "MIT"
+  "keywords": ["quiz", "game", "react", "vite", "rahoot"],
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.3",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.11",
+    "vite-plugin-static-copy": "^2.2.0"
+  }
 }
