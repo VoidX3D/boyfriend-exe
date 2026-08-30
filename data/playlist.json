@@ -9,6 +9,51 @@
       "format": "mp3",
       "description": "AnswersMusic background vibe.",
       "enabled": true
+    },
+    {
+      "id": "ed-sheeran-shape-of-you",
+      "title": "Ed Sheeran Shape Of You",
+      "artist": "BOYFRIEND.EXE",
+      "file": "music/Ed%20Sheeran%20-%20Shape%20of%20You.mp3",
+      "format": "mp3",
+      "description": "Ed Sheeran Shape Of You background vibe.",
+      "enabled": true
+    },
+    {
+      "id": "macklemore-can-t-hold-us-feat-ray-dalton",
+      "title": "Macklemore Can'T Hold Us (Feat Ray Dalton)",
+      "artist": "BOYFRIEND.EXE",
+      "file": "music/Macklemore%20-%20Can't%20Hold%20Us%20(feat.%20Ray%20Dalton).mp3",
+      "format": "mp3",
+      "description": "Macklemore Can'T Hold Us (Feat Ray Dalton) background vibe.",
+      "enabled": true
+    },
+    {
+      "id": "radwimps-sparkle-movie-ver",
+      "title": "RADWIMPS Sparkle Movie Ver",
+      "artist": "BOYFRIEND.EXE",
+      "file": "music/RADWIMPS%20-%20Sparkle%20-%20movie%20ver..mp3",
+      "format": "mp3",
+      "description": "RADWIMPS Sparkle Movie Ver background vibe.",
+      "enabled": true
+    },
+    {
+      "id": "shape-of-you-musiconly",
+      "title": "Shape Of You Musiconly",
+      "artist": "BOYFRIEND.EXE",
+      "file": "music/Shape_of_You_musiconly.mp3",
+      "format": "mp3",
+      "description": "Shape Of You Musiconly background vibe.",
+      "enabled": true
+    },
+    {
+      "id": "shape-of-you-vocalsonly",
+      "title": "Shape Of You Vocalsonly",
+      "artist": "BOYFRIEND.EXE",
+      "file": "music/Shape_of_you_Vocalsonly.mp3",
+      "format": "mp3",
+      "description": "Shape Of You Vocalsonly background vibe.",
+      "enabled": true
     }
   ]
 }
