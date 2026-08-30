@@ -24,6 +24,7 @@
   function renderHud() {
     var hud = $("#hud");
     hud.style.display = "flex";
+    var muted = !!(BEX.audio && BEX.audio.muted);
     hud.innerHTML =
       '<div class="hud-block"><span class="hud-label">SCORE</span>' +
       '<span class="hud-val" id="hudScore">0</span></div>' +
@@ -35,13 +36,15 @@
       '<span class="hud-mood" id="hudMood">' + BEX.reactions.moodLabel() + '</span>' +
       '<div class="hud-block"><span class="hud-label">PROGRESS</span>' +
       '<span class="hud-val" id="hudProg">0 / ' + BEX.config.TOTAL + '</span></div>' +
-      '<button id="muteBtn" class="mute-btn" title="mute" aria-label="mute">' +
-        BEX.svg.sound + '</button>';
+      '<button id="muteBtn" class="mute-btn" title="' + (muted ? "unmute" : "mute") + '" aria-label="' + (muted ? "Unmute all audio" : "Mute all audio") + '">' +
+        (muted ? BEX.svg.mute : BEX.svg.sound) + '</button>';
     $("#muteBtn").addEventListener("click", function () {
       var m = BEX.audio ? BEX.audio.toggleMute() : true;
       this.innerHTML = m ? BEX.svg.mute : BEX.svg.sound;
-      BEX.hud.toast(m ? "MUTED. The boyfriend can no longer hear your suffering."
-                     : "SOUND ON. He can hear everything now.");
+      this.title = m ? "unmute" : "mute";
+      this.setAttribute("aria-label", m ? "Unmute all audio" : "Mute all audio");
+      BEX.hud.toast(m ? "MUTED. All music and sound effects are off."
+                     : "SOUND ON. Music and sound effects restored.");
     });
     updateHud();
   }
