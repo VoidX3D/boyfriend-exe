@@ -13,6 +13,7 @@ const watch = require("fs").watch;
 
 const ROOT = path.resolve(__dirname, "..");
 const PORT = process.env.PORT || 5173;
+const HOST = "127.0.0.1";
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -69,6 +70,10 @@ server.on("upgrade", (req, socket) => {
   if (req.url === "/__reload") {
     socket.write("HTTP/1.1 200 OK\r\nContent-Type: text/event-stream\r\n\r\n");
     clients.push(socket);
+    socket.on("close", () => {
+      const idx = clients.indexOf(socket);
+      if (idx >= 0) clients.splice(idx, 1);
+    });
   }
 });
 
@@ -77,6 +82,14 @@ watch(ROOT, { recursive: true }, () => {
   clients.forEach((c) => { try { c.write("data: reload\n\n"); } catch (e) {} });
 });
 
-server.listen(PORT, () => {
-  console.log("BOYFRIEND.EXE dev server running at http://localhost:" + PORT);
+function shutdown(sig) {
+  console.log("\n" + sig + " — shutting down...");
+  server.close(() => { console.log("Server stopped."); process.exit(0); });
+  setTimeout(() => process.exit(1), 2000);
+}
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+
+server.listen(PORT, HOST, () => {
+  console.log("BOYFRIEND.EXE dev server running at http://" + HOST + ":" + PORT);
 });

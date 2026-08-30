@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install jsdom
+        run: |
+          mkdir -p /tmp/bexetest/node_modules
+          cd /tmp/bexetest
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund jsdom
+
+      - name: Start dev server
+        run: node scripts/dev.js &
+        background: true
+
+      - name: Wait for server
+        run: |
+          for i in {1..20}; do
+            if curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5173/ | grep -q 200; then
+              echo 'Server up'
+              break
+            fi
+            sleep 0.5
+          done
+
+      - name: Run smoke tests
+        run: |
+          node -e "
+          const fs = require('fs'), path = require('path'), { JSDOM } = require('/tmp/bexetest/node_modules/jsdom');
+          const PROJ = process.cwd();
+          const dom = new JSDOM(fs.readFileSync(path.join(PROJ, 'index.html'), 'utf8'), { runScripts: 'outside-only', pretendToBeVisual: true, url: 'http://localhost/' });
+          const { window } = dom, doc = window.document;
+          window.Audio = class { constructor() { this.play = () => {}; this.addEventListener = () => {}; } };
+          window.AudioContext = class { constructor() { this.state = 'running'; this.resume = () => {}; } };
+          ['src/core.js', 'src/audio.js', 'src/reactions.js', 'src/redirect.js', 'src/hud.js', 'src/corruption.js', 'src/chaos.js', 'src/flow.js', 'src/namegate.js', 'src/results.js', 'src/extra.js'].forEach((f) => window.eval(fs.readFileSync(path.join(PROJ, f), 'utf8')));
+          const BEX = window.BEX;
+          const qFile = JSON.parse(fs.readFileSync(path.join(PROJ, 'data/questions.json'), 'utf8'));
+          const cFile = JSON.parse(fs.readFileSync(path.join(PROJ, 'data/content.json'), 'utf8'));
+          BEX.questions.splice(0, BEX.questions.length, ...qFile.questions);
+          BEX.phantom.splice(0, BEX.phantom.length, ...qFile.phantomQuestions);
+          BEX.bonus = qFile.bonusQuestions;
+          Object.keys(cFile).forEach((k) => { BEX.content[k] = cFile[k]; });
+          BEX.config.TOTAL = BEX.questions.length;
+          const click = (el) => el.dispatchEvent(new window.Event('click', { bubbles: true }));
+          const Q = BEX.questions;
+          let nameDone = false;
+          function driveName() { if (nameDone) return; const i = doc.querySelector('#nameInput'); if (!i) return; i.value = 'Anuradha'; click(doc.querySelector('#continueBtn')); click(doc.querySelector('#beginBtn')); nameDone = true; }
+          function pickCorrect(q) { return q.options.find((o) => o.correct); }
+          function tick() {
+            driveName();
+            if (doc.querySelector('.result-screen')) { console.log('REACHED:', doc.querySelector('.result-title').textContent.trim()); return true; }
+            const rl = doc.querySelector('.redirect-layer');
+            if (rl) { const nb = rl.querySelector('[data-act=\"next\"]') || rl.querySelector('[data-act=\"yes\"]'); if (nb) click(nb); return false; }
+            const fb = doc.querySelector('#feedback');
+            if (fb && fb.querySelector('.btn')) { const cont = Array.from(fb.querySelectorAll('.btn')).find((b) => /CONTINUE|NEXT|→|TRY AGAIN/.test(b.textContent)) || fb.querySelector('.btn-primary'); click(cont); return false; }
+            const qnum = doc.querySelector('.q-num'); if (!qnum) return false;
+            const txt = qnum.textContent;
+            if (txt.includes('??')) { const a = Array.from(doc.querySelectorAll('.answer')).find((x) => !x.disabled); click(a); return false; }
+            const m = txt.match(/(\\d+)\\s*\\/\\s*\\d+/); if (!m) return false;
+            const n = +m[1], q = Q[n - 1]; if (!q) return false;
+            const opt = pickCorrect(q); if (!opt) return false;
+            click(doc.querySelector('.answer[data-opt=\"' + opt.id + '\"]'));
+            return false;
+          }
+          process.on('uncaughtException', (e) => { console.error('UNCAUGHT:', e.stack); process.exit(1); });
+          let el = 0;
+          const iv = setInterval(() => {
+            el += 200; let d = false;
+            try { d = tick(); } catch (e) { console.error('TICK ERR:', e.stack); clearInterval(iv); process.exit(1); }
+            if (d) { clearInterval(iv); console.log('CORRECT RUN OK'); process.exit(0); }
+            if (el > 120000) { console.error('TIMEOUT'); clearInterval(iv); process.exit(1); }
+          }, 200);
+          "
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('package.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('manifest.webmanifest'))"
+      - name: Check JS syntax
+        run: |
+          for f in src/*.js scripts/*.js; do
+            node --check "$f" || exit 1
+          done
+          echo 'All JS files parse OK'
